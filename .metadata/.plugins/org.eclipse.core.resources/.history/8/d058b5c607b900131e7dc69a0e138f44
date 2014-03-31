@@ -1,0 +1,24 @@
+package UI;
+
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class View extends JFrame {
+	
+	private JLabel label;
+
+	public View() {
+		super("Window");
+		label = new JLabel();
+		setSize(600,400);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		this.setLayout(new GridLayout());
+		label.add(new JTextField());
+		label.add(new JButton());
+		this.add(label);
+	}
+}

@@ -1,8 +1,6 @@
 package Threads;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import Tabellen.Person;
 import Tabellen.Tabelle;
 
@@ -17,8 +15,8 @@ public class SearchNr {
 	public ArrayList<Person >search (int number){
 		
 		ArrayList<Person> table = new Tabelle().getList();
-		for (int i = 0; i < table.size(); i++ ){
-			if(number == table.get(i).getNr() ){
+		for (int i = 0; i < table.size(); i++) {
+			if (number == table.get(i).getNr() ) {
 				foundNumbers.add(table.get(i));
 			}
 			
