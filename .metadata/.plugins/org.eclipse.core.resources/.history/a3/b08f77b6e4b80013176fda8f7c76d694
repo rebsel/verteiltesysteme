@@ -1,0 +1,19 @@
+package Tabellen;
+
+import java.util.ArrayList;
+/**
+ * 
+ * @author Karin, Rebecca, Victor
+ *
+ */
+public class Tabelle {
+	
+	private ArrayList<String> list; 
+	
+	public Tabelle() {
+		list = new ArrayList<String>();
+		list.add("Müller)
+		
+	}
+
+}

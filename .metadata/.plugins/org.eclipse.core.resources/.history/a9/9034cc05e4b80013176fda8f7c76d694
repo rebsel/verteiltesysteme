@@ -1,0 +1,14 @@
+package Tabellen;
+
+import java.util.ArrayList;
+
+public class Tabelle {
+	
+	private ArrayList<String> list; 
+	
+	public Tabelle() {
+		list = new ArrayList<String>;
+		
+	}
+
+}
