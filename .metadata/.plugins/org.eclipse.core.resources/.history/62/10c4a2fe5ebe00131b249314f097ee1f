@@ -1,4 +1,3 @@
-import Threads.SearchNr;
 import UI.View;
 
 /**
@@ -12,10 +11,6 @@ public class Main {
 	
 	public static void main (String[] args) {
 		View view = new View();
-		SearchNr searchnr = new SearchNr();
-		Thread t1 = new Thread(searchnr);
-		t1.start();
-		System.out.println("ich bin "+ Thread.currentThread().getName());
 	}
 
 }
