@@ -1,6 +1,8 @@
 package UI;
 
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,13 +14,17 @@ public class View extends JFrame {
 		super("Testat1");
 		setSize(450,200);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLayout(new FlowLayout());
+		this.setLayout(new GridLayout(4, 2));
 		
-		JLabel label = new JLabel();
-		getContentPane().add(new JButton("X"));
-		getContentPane().add(new JTextField(25));
+		
+		
+		getContentPane().add(new JLabel("Name"));
+		getContentPane().add(new JTextField(20));
+		getContentPane().add(new JLabel("Number"));
+		getContentPane().add(new JTextField(20));
 		getContentPane().add(new JButton("  Submit  "));
-		getContentPane().add(label);
+		
+		getContentPane().add(new JButton("Beenden"));
 		
 		setVisible(true);
 
