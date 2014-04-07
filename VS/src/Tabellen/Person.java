@@ -34,6 +34,11 @@ public class Person {
 	public void setNr(int nr) {
 		this.nr = nr;
 	}
+
+	@Override
+	public String toString() {
+		return name + "       " + nr;
+	}
 	
 	
 
