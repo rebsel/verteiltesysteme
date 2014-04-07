@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import Tabellen.Person;
 import Tabellen.Tabelle;
 
-public class SearchNr {
+public class SearchNr implements Runnable{
 	
 	private ArrayList<Person> foundNumbers;
 	
@@ -22,5 +22,11 @@ public class SearchNr {
 			
 		}
 		return foundNumbers;
+	}
+
+	public void run() {
+		// TODO Auto-generated method stub
+		System.out.println("Ich bin " + Thread.currentThread().getName());
+		
 	}
 }
