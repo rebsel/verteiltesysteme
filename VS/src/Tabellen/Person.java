@@ -12,7 +12,12 @@ public class Person {
 	private String name;
 	// phone number of person 
 	private int nr;
-
+	
+	/**
+	 * constructor 
+	 * @param name : name of person
+	 * @param nr : given number
+	 */
 	public Person(String name, int nr) {
 		this.name = name;
 		this.nr = nr;
@@ -34,7 +39,11 @@ public class Person {
 	public void setNr(int nr) {
 		this.nr = nr;
 	}
-
+	
+	/**
+	 * Overwrite the string-method for a better presentation of the
+	 * results in the view
+	 */
 	@Override
 	public String toString() {
 		return name + "       " + nr;

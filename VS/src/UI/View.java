@@ -18,28 +18,28 @@ import Threads.SearchName;
  * View.java
  * @author Karin, Rebecca, Victor
  * 7.4.2014
- * 
- * TO-DO:
- * - SearchNr anpassen
- * - trimBlanks
- * - Umlaute?
- * - auf Rechner im Labor testen
- * - funktionieren ä,ü und von Reihbach?
- * - leere Eingaben, Blank oder Tabfolgen sofort abweisen und nicht Liste durchsuchen!
- * - Bei NullPointerException --> Suche erfolglos in TextArea
- * 
- * 
+ * represents the view-class
+ * starts the threads and prints the results
  * 
  */
 public class View extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = 1L;
 	
+	// textarea containing the results of the search
 	private JTextArea textarea;
+	// submit button
 	private JButton submit;
+	// quit button
 	private JButton quit;
+	// input field for name
 	private JTextField name;
+	// input field for number
 	private JTextField number;
 
-	
+	/**
+	 * Creating a view
+	 */
 	public View() {
 		super("Testat1");
 		setSize(450,300);
@@ -49,7 +49,7 @@ public class View extends JFrame implements ActionListener {
 		textarea = new JTextArea(5,100);
 		name = new JTextField(20);
 		number = new JTextField(20);
-		submit = new JButton("  Submit  ");
+		submit = new JButton("Submit");
 		quit = new JButton("Beenden");
 		
 		submit.addActionListener(this);
@@ -66,74 +66,93 @@ public class View extends JFrame implements ActionListener {
 		setVisible(true);
 
 	}
-	
+	/**
+	 * Actionlistener for submit button and quit button
+	 */
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == submit) {
 			textarea.setText("");
-			// proof of name-textfield
+			
+			// proof of name-textfield and starts the thread
 			if (!(name.getText().equals(""))) {
 				SearchName searchname = new SearchName(name.getText());
 				Thread tname = new Thread(searchname);
-				tname.start();
+				tname.start(); // start thread --> run-method in SearchName
 				try {
-					tname.join();
+					tname.join(); // join thread!
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
 				try {
-					fillTextarea(searchname.getFoundNames());
+					// add the results
+					fillTextarea(searchname.getFoundNames(), name.getText());
+					
 				} catch (NullPointerException n) {
 					System.err.print("Keine Ergebnisse");
 					textarea.setText("Suche erfolglos");
 				}
-				// PROOF OF BLANKS!
 				
 			} else {
-				System.out.println("Keine Eingabe: Name");
+				// if nothing entered in search input field
+				textarea.setText("Keine Eingabe: Name \n");
 			}
 			
-			// proof of number-textfield
-			if( !(number.getText().equals("")) && isNumeric(number.getText()) ) {
-				SearchNr searchnr = new SearchNr();
+			// proof of number-textfield and starts the thread
+			if( !(number.getText().equals("")) && isNumeric(number.getText().trim()) ) {
+				SearchNr searchnr = new SearchNr(Integer.parseInt(number.getText().trim())); // parse given String number into number
 				Thread tnumber = new Thread(searchnr);
-				tnumber.start();
+				tnumber.start();  // start thread --> run-method in SearchName 
 				try {
-					tnumber.join();
+					tnumber.join(); // join!
 					
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
+				// add the results
+				fillTextarea(searchnr.getFoundNumbers(), number.getText());
+				
+			} else if(number.getText().equals("")){
+				textarea.append("Keine Eingabe: Number \n");
 				
 			} else if(!isNumeric(number.getText())) {
-				System.out.println("Number muss Integer sein");
-				
-			} else {
-				System.out.println("Keine Eingabe: Number");
+				textarea.append("Number muss Integer sein \n");				
 			}
 			
+		// exits when clicking the quit-button	
 		} else if (e.getSource() == quit) {
 			System.exit(0);
 		}
 	}
 	
+	
+	/**
+	 * proof of the given string if it is numeric
+	 * @param str : value of number input field
+	 * @return : true, if is it a number
+	 */
 	public boolean isNumeric(String str) {
 		try {
-			int x = Integer.parseInt(str);
+			Integer.parseInt(str);
 		} catch (NumberFormatException nfe) {
 			return false;
 		}
 		return true; 
 	}
-	
-	public void fillTextarea(ArrayList<Person> foundValues) {
-		for (int x = 0; x < foundValues.size(); x++) {
-			textarea.append(foundValues.get(x).toString() + "\n");
+	/**
+	 * Writes results into the textarea 
+	 * For each Person a new line
+	 * @param foundValues : list of results
+	 * @param search : value of search input field (name or number)
+	 */
+	public void fillTextarea(ArrayList<Person> foundValues, String search) {
+		if (foundValues.size() > 0 ) {
+			for (int x = 0; x < foundValues.size(); x++) {
+				textarea.append(foundValues.get(x).toString() + "\n");
+			}
+		} else {
+			textarea.append("Suche nach "+ search +" war erfolglos \n");
 		}
 	}
-	
-	//function trimBlanks!
-	
 }

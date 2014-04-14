@@ -12,6 +12,9 @@ public class Tabelle {
 	// list containing Person-objects
 	private ArrayList<Person> list; 
 	
+	/**
+	 * creating a list with persons for testing use
+	 */
 	public Tabelle() {
 		list = new ArrayList<Person>();
 		list.add(new Person("Müller", 1110));
